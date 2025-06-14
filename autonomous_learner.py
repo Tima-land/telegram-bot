@@ -31,9 +31,9 @@ logger = logging.getLogger(__name__)
 ROLE_SELECTION, REPORT_PHOTO, REPORT_TEXT, UPLOAD_NEXT_LESSON = range(4)
 
 # Инициализация данных
-DATA_FILE = 'b1ot_data.json'
-LESSONS_DIR = 'le1ssons'
-REPORTS_DIR = 're1ports'
+DATA_FILE = 'b21ot_data.json'
+LESSONS_DIR = 'le21ssons'
+REPORTS_DIR = 're21ports'
 
 # Клавиатуры
 MOTHER_KEYBOARD = ReplyKeyboardMarkup(
@@ -93,20 +93,20 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         role = data['users'][user_id]['role']
         if role == 'mother':
             await update.message.reply_text(
-                "Вы зарегистрированы как 👩 Мать",
+                "Вы зарегистрированы как 👩 Матушка",
                 reply_markup=MOTHER_KEYBOARD
             )
         else:
             await update.message.reply_text(
-                "Вы зарегистрированы как 👦 Сын",
+                "Вы зарегистрированы как 👦 Сын матушки",
                 reply_markup=SON_KEYBOARD
             )
             await show_son_status(update.message, data, user_id)
         return ConversationHandler.END
 
     keyboard = [
-        [InlineKeyboardButton("👩 Мать", callback_data='mother')],
-        [InlineKeyboardButton("👦 Сын", callback_data='son')]
+        [InlineKeyboardButton("👩 Матушка", callback_data='mother')],
+        [InlineKeyboardButton("👦 Сын матушки", callback_data='son')]
     ]
     await update.message.reply_text(
         "Выберите вашу роль:",
@@ -673,7 +673,7 @@ def main() -> None:
     for folder in [LESSONS_DIR, REPORTS_DIR]:
         os.makedirs(folder, exist_ok=True)
 
-    application = Application.builder().token("7636649473:AAGKLzuI-az8HNnuZamhUgLYDMrhfvDJmY0").build()
+    application = Application.builder().token("8159436992:AAEKdGBdxVU4TbLuGDCdHpXW8HhzeZecBPY").build()
 
     # Обработчики команд и сообщений
     conv_handler = ConversationHandler(
